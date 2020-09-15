@@ -18,8 +18,11 @@ export default function form(props) {
           value={formValues.email}
         ></input><br/>
         <select name="role" onChange={handleChange} value={formValues.role}>
-          <option value="Teacher">Teacher</option>
+          <option value="Default">-- Choose Role --</option>
           <option value="User">User</option>
+          <option value="Teacher">Teacher</option>
+          <option value="Student">Student</option>
+          <option value="Developer">Developer</option>
         </select><br/>
         <button>Submit</button>
       </form>

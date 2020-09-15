@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
 import User from "./User";
 import Form from "./Form";
@@ -15,8 +14,9 @@ const initialFormValues = {
 };
 
 function App() {
-  const [userData, setUserData] = useState([dummyData]);
+  const [userData, setUserData] = useState(dummyData);
   const [formValues, setFormValues] = useState(initialFormValues);
+
 
   const change = (evt) => {
     const { name, value } = evt.target;
@@ -30,6 +30,7 @@ function App() {
       email: formValues.email.trim(),
       role: formValues.role,
     };
+    console.log('role', formValues.role)
 
     setUserData([...userData, newUser]);
     setFormValues(initialFormValues);
