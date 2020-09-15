@@ -1,24 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import User from "./User";
+import Form from "./Form";
+
+const dummyData = [
+  { name: "Timmy", email: "timmy@timmy.com", role: "Full Stack Engineer" },
+];
+
+const initialFormValues = {
+  name: "",
+  email: "",
+  role: "",
+};
 
 function App() {
+  const [userData, setUserData] = useState([dummyData]);
+  const [formValues, setFormValues] = useState(initialFormValues);
+
+  const change = (evt) => {
+    const { name, value } = evt.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const submit = (evt) => {
+    evt.preventDefault();
+    const newUser = {
+      name: formValues.name.trim(),
+      email: formValues.email.trim(),
+      role: formValues.role,
+    };
+
+    setUserData([...userData, newUser]);
+    setFormValues(initialFormValues);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>User Data</h1>
+      <Form
+        handleChange={change}
+        handleSubmit={submit}
+        formValues={formValues}
+      />
+      {userData.map((user, index) => {
+        return <User key={index} details={user} />;
+      })}
     </div>
   );
 }
